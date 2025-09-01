@@ -1,0 +1,4 @@
+# 忽略所有
+visdrone*
+workdir*
+heatmap*
