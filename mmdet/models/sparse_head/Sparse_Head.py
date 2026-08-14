@@ -20,7 +20,10 @@ from mmdet.utils import (ConfigType, InstanceList, MultiConfig, OptConfigType,
 
 from mmdet.models.task_modules.prior_generators import MlvlPointGenerator
 from mmdet.models.utils import multi_apply, unpack_gt_instances, select_single_mlvl, filter_scores_and_topk
-import spconv.pytorch as spconv
+try:
+    import spconv.pytorch as spconv
+except ImportError:  # spconv is only needed by the sparse-conv variant
+    spconv = None
 from typing import Dict, List, Tuple
 
 from .. import merge_aug_results

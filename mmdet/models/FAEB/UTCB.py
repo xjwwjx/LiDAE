@@ -17,13 +17,22 @@ def channel_shuffle(x, groups):
     return x
 
 class UTCB(nn.Module):
+    """Upsampling block with transposed convolution (as described in the
+    paper: fuses different-level feature maps via transposed convolution).
+
+    NOTE: this structure matches the released checkpoints. Do not replace
+    the ConvTranspose2d with nearest upsampling, or the released weights
+    will no longer load.
+    """
+
     def __init__(self, in_channels, out_channels, kernel_size=3, stride=1):
         super(UTCB, self).__init__()
 
         self.in_channels = in_channels
         self.out_channels = out_channels
         self.up_dwc = nn.Sequential(
-            nn.Upsample(scale_factor=2),
+            nn.ConvTranspose2d(self.in_channels, self.in_channels,
+                               kernel_size=4, stride=2, padding=1, bias=True),
             nn.Conv2d(self.in_channels, self.in_channels, kernel_size=kernel_size, stride=stride,
                       padding=kernel_size // 2, groups=self.in_channels, bias=False),
             nn.BatchNorm2d(self.in_channels),

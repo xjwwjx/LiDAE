@@ -6,8 +6,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 from mmengine.model import BaseModule
 from torch import Tensor
-from mmdetection.mmdet.models.FAEB.CAE import CAE
-from mmdetection.mmdet.models.FAEB.UTCB import UTCB
+from ..FAEB.CAE import CAE
+from ..FAEB.UTCB import UTCB
 
 from mmdet.registry import MODELS
 from mmdet.utils import MultiConfig

@@ -1,13 +1,9 @@
 import math
 from typing import Tuple, Dict
 
-import matplotlib
-import spconv.pytorch as spconv
 import torch
-from functorch.dim import Tensor
-from numpy.ma.core import indices
+from torch import Tensor
 from torch import nn
-import matplotlib.pyplot as plt
 from torch.nn import init
 
 from .Zero_shot_N2N import N2N_network

@@ -10,7 +10,7 @@ from tqdm import tqdm
 import numpy as np
 
 from mmdet.models.LiIA.VOC import VOCDataset_Dehaze, basic_tfm
-from mmdetection.mmdet.models.LiIA.LiIA_Module import LiIA_Module
+from .LiIA_Module import LiIA_Module
 from mmdet.models.LiIA.RunModule import RunModel
 
 # -------------------- 初始化部分 --------------------

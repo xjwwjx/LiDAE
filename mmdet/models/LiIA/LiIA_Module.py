@@ -69,14 +69,17 @@ class LiIA_Module(nn.Module):
     def __init__(self, config=cfg):
         super(LiIA_Module, self).__init__()
         self.cfg = config
-        self.WCPG = WCPG(config=self.cfg)
+        # NOTE: attribute is named CNN_PP to stay compatible with the
+        # released checkpoints (the Wavelet Convolution Parameter Generator
+        # was called CNN_PP at training time).
+        self.CNN_PP = WCPG(config=self.cfg)
         self.FG = [x(self.cfg) for x in self.cfg.filters]
         self.mse = nn.MSELoss()
 
     def forward(self, feature):
         resized_feature = F.interpolate(feature, size=(256, 384), mode='bilinear', align_corners=False)
 
-        params = self.WCPG(resized_feature)
+        params = self.CNN_PP(resized_feature)
 
         for per_filter in self.FG:
             feature, _ = per_filter.apply(feature, params)
